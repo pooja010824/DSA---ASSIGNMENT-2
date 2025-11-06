@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+// Function to perform binary search
+int binarySearch(int arr[], int n, int target) {
+    int low = 0, high = n - 1, mid;
+
+    while (low <= high) {
+        mid = (low + high) / 2;
+
+        if (arr[mid] == target)
+            return mid;  // Element found
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+
+    return -1; // Element not found
+}
+
+// Function to sort array using simple Bubble Sort
+void sortArray(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {7, 6, 9, 6, 8, 7, 12, 14, 15, 18, 19, 20, 21};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 18;
+
+    // Sort the array first
+    sortArray(arr, n);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+
+    // Perform binary search
+    int result = binarySearch(arr, n, target);
+
+    if (result != -1)
+        printf("Element %d found at index %d (in sorted array).\n", target, result);
+    else
+        printf("Element %d not found.\n", target);
+
+    return 0;
+}
